@@ -11,8 +11,10 @@ public class VsComputer {
     Player computer;
     Board board;
     int first;
+	// public VsComputer(){
 
-    public void playNew() {
+	// }
+    public VsComputer() {
         System.out.print("Player, enter your name:");
         String name = GameParams.SCANNER.next();
         System.out.print(name + ", choose your symbol(X/O):");
@@ -30,18 +32,18 @@ public class VsComputer {
 
         System.out.println("Enter 1 to play first");
         System.out.println("Enter 2 to play second");
-        // System.out.print("Enter your choice:");
-        while ((ch == '1' || ch == 2)) {
+        System.out.print("Enter your choice:");
+		ch=' ';
+        while ((ch == '1' || ch == '2')) {
             System.out.print("Enter 1 or 2: ");
             ch = Character.toUpperCase(GameParams.SCANNER.next().charAt(0));
-
         }
 		System.out.println("\n ROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
 		System.out.println();
 
 		first = ch == '1' ? 1 : 2;
         System.out.println();
-        play();
+        
     }
 
     public void play() {
@@ -89,7 +91,11 @@ public class VsComputer {
                 System.out.println("You Played well\nGame ends in a Draw");
             }
         }
-        System.out.println("\nEnter 1 to play a new game");
+		afterPlay();
+
+	}
+	public void afterPlay() {	
+	    System.out.println("\nEnter 1 to play a new game");
         System.out.println("\nEnter 2 for new player");
         System.out.println("\nEnter e to go to previous menu");
         System.out.print("Enter your choice:");
@@ -103,7 +109,7 @@ public class VsComputer {
         if(ch=='1')
             play();
         else if(ch=='2')
-            playNew();
+            (new VsComputer()).play();
         else{
             System.out.println("Going to previous menu");
         }

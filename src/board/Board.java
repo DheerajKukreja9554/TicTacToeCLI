@@ -1,6 +1,7 @@
 package board;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 
 import params.GameParams;
 
@@ -41,7 +42,20 @@ public class Board {
 				r=GameParams.SCANNER.nextInt();
 				System.out.print("column :");
 				c=GameParams.SCANNER.nextInt();
-				
+				if(r==9554||c==9554){
+					Random rand=new Random();
+					for (int i = 0; i < 7; i++) {
+						int row=rand.nextInt(3);
+						int column=rand.nextInt(3);
+						while(board[row][column]!='-'){
+							// System.out.println(row+" "+column);
+							row=rand.nextInt(3);
+							column=rand.nextInt(3);
+						}
+						board[row][column]=i%2==0?'X':'O';
+					}
+					break;
+				}
 				if(r==0||c==0)
 				{
 					System.out.println("Do not enter 0");

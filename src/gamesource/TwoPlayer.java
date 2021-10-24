@@ -9,8 +9,7 @@ public class TwoPlayer{
     Player player1;
     Player player2;
     Board board;
-
-    public void playNew() {
+    public TwoPlayer(){
         System.out.print("\nPlayer 1, enter your name:");
         String name=GameParams.SCANNER.next();
         System.out.print(name+", choose your symbol(X/O):");
@@ -32,33 +31,13 @@ public class TwoPlayer{
             player2=new Player(name, GameParams.O);
         System.out.println("Your symbol: "+player2.symbol);
 
-        System.out.println("\n ROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
+        System.out.println("\nROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
 		System.out.println();
 
-        play();
-        System.out.println("\nEnter 1 to play a new game");
-        System.out.println("Enter 2 for new players");
-        System.out.println("Enter e to go to previous menu");
-        System.out.print("\nEnter your choice:");
-        ch=GameParams.SCANNER.next().charAt(0);
-        
-        while(!(ch=='1'||ch=='2'||ch=='e'||ch=='E')){
-            
-            System.out.print("Enter 1, 2 or e:");
-            ch=GameParams.SCANNER.next().charAt(0);
-        }
-
-        if(ch=='1')
-            play();
-        else if(ch=='2')
-            playNew();
-        else if(ch=='e'||ch=='E'){
-            System.out.println("\nGoing to previous menu");
-        }
     }
-        
+    
     public void play() {
-            
+        
         board=new Board();
         board.print();
         for (int turn = 0; turn < 9; turn++) {
@@ -81,9 +60,35 @@ public class TwoPlayer{
                 }
             }
             if((board.couldWin(player1.symbol)==false)&&(board.couldWin(player2.symbol)==false)){
-				System.out.println("Game would end in a DRAW");
+                System.out.println("Game would end in a DRAW");
 				break;
 			}
+        }
+        afterPlay();
+    }
+    public void afterPlay() {
+        
+        System.out.println("\nEnter 1 to play a new game");
+        System.out.println("Enter 2 for new players");
+        System.out.println("Enter e to go to previous menu");
+        System.out.print("\nEnter your choice:");
+        char ch=GameParams.SCANNER.next().charAt(0);
+        
+        while(!(ch=='1'||ch=='2'||ch=='e'||ch=='E')){
+            
+            System.out.print("Enter 1, 2 or e:");
+            ch=GameParams.SCANNER.next().charAt(0);
+        }
+
+        if(ch=='1')
+            play();
+        else if(ch=='2'){
+            System.out.println(this.getClass());
+            (new TwoPlayer()).play();
+            // play();
+        }
+        else{
+            System.out.println("\nGoing to previous menu");
         }
     }
 }
