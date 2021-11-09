@@ -83,12 +83,12 @@ public class TwoPlayer{
         if(ch=='1')
             play();
         else if(ch=='2'){
-            System.out.println(this.getClass());
+            // System.out.println(this.getClass());
             (new TwoPlayer()).play();
             // play();
         }
         else{
-            System.out.println("\nGoing to previous menu");
+            System.out.println("\nGoing to previous menu.......\n");
         }
     }
 }

@@ -14,8 +14,17 @@ public class VsComputer {
 	// public VsComputer(){
 
 	// }
+	public void timeLoop() {
+		for (long i = 0; i < 900000000; i++) {
+			if (i%300000000==0) {
+				for (Long j = (long)0; j < 300000000; j++) {}
+				System.out.print(">>>");
+			}
+		}
+		System.out.println();
+	}
     public VsComputer() {
-        System.out.print("Player, enter your name:");
+        System.out.print("\nPlayer, enter your name:");
         String name = GameParams.SCANNER.next();
         System.out.print(name + ", choose your symbol(X/O):");
         char ch = Character.toUpperCase(GameParams.SCANNER.next().charAt(0));
@@ -30,16 +39,16 @@ public class VsComputer {
 
         computer = new Player("Computer", player.symbol == GameParams.O ? GameParams.X : GameParams.O);
 
-        System.out.println("Enter 1 to play first");
+        System.out.println("\nEnter 1 to play first");
         System.out.println("Enter 2 to play second");
-        System.out.print("Enter your choice:");
-		ch=' ';
-        while ((ch == '1' || ch == '2')) {
+        System.out.print("\nEnter your choice:");
+		ch=Character.toUpperCase(GameParams.SCANNER.next().charAt(0));;
+        while (!(ch == '1' || ch == '2')) {
             System.out.print("Enter 1 or 2: ");
             ch = Character.toUpperCase(GameParams.SCANNER.next().charAt(0));
         }
-		System.out.println("\n ROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
-		System.out.println();
+		System.out.println("\nROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
+		// System.out.println();
 
 		first = ch == '1' ? 1 : 2;
         System.out.println();
@@ -52,7 +61,7 @@ public class VsComputer {
         for (int turn = 0; turn < 9; turn++) {
             if (turn % 2 == 0) {
                 if (first == 1) {
-                    System.out.println(player.name + "'s, your turn");
+                    System.out.println(player.name + ", your turn");
                     board.read(player.symbol);
                     board.print();
                     if (board.isWon(player.symbol)) {
@@ -60,7 +69,8 @@ public class VsComputer {
                         break;
                     }
                 } else {
-                    System.out.println(computer.name + "'s, your turn");
+                    System.out.println(computer.name + "'s turn");
+					timeLoop();
                     compTurn(board, computer.symbol, player.symbol);
                     board.print();
                     if (board.isWon(computer.symbol)) {
@@ -70,7 +80,7 @@ public class VsComputer {
                 }
             } else {
                 if (first == 2) {
-                    System.out.println(player.name + "'s, your turn");
+                    System.out.println(player.name + ", your turn");
                     board.read(player.symbol);
                     board.print();
                     if (board.isWon(player.symbol)) {
@@ -78,7 +88,8 @@ public class VsComputer {
                         break;
                     }
                 } else {
-                    System.out.println(computer.name + "'s, your turn");
+                    System.out.println(computer.name + " turn");
+					timeLoop();
                     compTurn(board, computer.symbol, player.symbol);
                     board.print();
                     if (board.isWon(computer.symbol)) {
@@ -89,6 +100,7 @@ public class VsComputer {
             }
             if(!(board.couldWin(player.symbol)&&board.couldWin(computer.symbol))){
                 System.out.println("You Played well\nGame ends in a Draw");
+				break;
             }
         }
 		afterPlay();
@@ -96,8 +108,8 @@ public class VsComputer {
 	}
 	public void afterPlay() {	
 	    System.out.println("\nEnter 1 to play a new game");
-        System.out.println("\nEnter 2 for new player");
-        System.out.println("\nEnter e to go to previous menu");
+        System.out.println("Enter 2 for new player");
+        System.out.println("Enter e to go to previous menu");
         System.out.print("Enter your choice:");
         char ch=GameParams.SCANNER.next().charAt(0);
         
@@ -105,13 +117,13 @@ public class VsComputer {
             System.out.print("Enter 1, 2 or e:");
             ch=GameParams.SCANNER.next().charAt(0);
         }
-
+		System.out.println();
         if(ch=='1')
             play();
         else if(ch=='2')
             (new VsComputer()).play();
         else{
-            System.out.println("Going to previous menu");
+            System.out.println("Going to previous menu.....\n");
         }
     }
     public void compTurn(Board board,char symbol,char opp)
