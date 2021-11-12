@@ -1,6 +1,8 @@
-import communications.TicTacToe;
+package tictactoecli;
 
-public class Game {
+import tictactoecli.communications.TicTacToe;
+
+public class App {
     public static void main(String[] args) throws Exception {
 
         TicTacToe game=new TicTacToe();

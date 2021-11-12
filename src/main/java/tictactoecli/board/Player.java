@@ -1,4 +1,4 @@
-package board;
+package tictactoecli.board;
 
 public class Player {
     public String name;

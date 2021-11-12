@@ -1,4 +1,4 @@
-package params;
+package tictactoecli.params;
 
 import java.util.Scanner;
 

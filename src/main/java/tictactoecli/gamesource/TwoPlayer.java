@@ -1,8 +1,8 @@
-package gamesource;
+package tictactoecli.gamesource;
 
-import board.Board;
-import board.Player;
-import params.GameParams;
+import tictactoecli.board.Board;
+import tictactoecli.board.Player;
+import tictactoecli.params.GameParams;
 
 public class TwoPlayer{
     

@@ -1,10 +1,10 @@
-package gamesource;
+package tictactoecli.gamesource;
 
 import java.util.Random;
 
-import board.Board;
-import board.Player;
-import params.GameParams;
+import tictactoecli.board.Board;
+import tictactoecli.board.Player;
+import tictactoecli.params.GameParams;
 
 public class VsComputer {
     Player player;

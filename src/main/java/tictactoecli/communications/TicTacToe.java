@@ -1,8 +1,8 @@
-package communications;
+package tictactoecli.communications;
 
-import gamesource.TwoPlayer;
-import gamesource.VsComputer;
-import params.GameParams;
+import tictactoecli.gamesource.TwoPlayer;
+import tictactoecli.gamesource.VsComputer;
+import tictactoecli.params.GameParams;
 
 public class TicTacToe{
     public TicTacToe(){

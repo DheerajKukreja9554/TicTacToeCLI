@@ -1,9 +1,9 @@
-package board;
+package tictactoecli.board;
 
 import java.util.InputMismatchException;
 import java.util.Random;
 
-import params.GameParams;
+import tictactoecli.params.GameParams;
 
 public class Board {
     
