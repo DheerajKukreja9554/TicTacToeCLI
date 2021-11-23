@@ -2,6 +2,7 @@ package tictactoecli.gamesource;
 
 import tictactoecli.board.Board;
 import tictactoecli.board.Player;
+import tictactoecli.params.DBParams;
 import tictactoecli.params.GameParams;
 
 public class TwoPlayer{
@@ -12,6 +13,7 @@ public class TwoPlayer{
     public TwoPlayer(){
         System.out.print("\nPlayer 1, enter your name:");
         String name=GameParams.SCANNER.next();
+        
         System.out.print(name+", choose your symbol(X/O):");
         char ch=Character.toUpperCase(GameParams.SCANNER.next().charAt(0));
 
@@ -30,7 +32,8 @@ public class TwoPlayer{
         else
             player2=new Player(name, GameParams.O);
         System.out.println("Your symbol: "+player2.symbol);
-
+        DBParams.checkPlayer(player1.name, DBParams.OTHERS_TABLE);
+        DBParams.checkPlayer(player2.name, DBParams.OTHERS_TABLE);
         System.out.println("\nROWS AND COLUMNS ARE FROM (1,1) TO (3,3)");
 		System.out.println();
 
@@ -47,6 +50,8 @@ public class TwoPlayer{
                 board.print();
                 if(board.isWon(player1.symbol)){
                     System.out.println("Congrats, "+player1.name+" you won");
+                    DBParams.updateScore(player1.name, DBParams.OTHERS_TABLE, 1);
+                    DBParams.updateScore(player2.name, DBParams.OTHERS_TABLE, -1);
                     break;
                 }
             }
@@ -56,12 +61,16 @@ public class TwoPlayer{
                 board.print();
                 if(board.isWon(player2.symbol)){
                     System.out.println("Congrats, "+player2.name+" you won");
+                    DBParams.updateScore(player1.name, DBParams.OTHERS_TABLE, -1);
+                    DBParams.updateScore(player2.name, DBParams.OTHERS_TABLE, 1);
                     break;
                 }
             }
             if((board.couldWin(player1.symbol)==false)&&(board.couldWin(player2.symbol)==false)){
                 System.out.println("Game would end in a DRAW");
-				break;
+				DBParams.updateScore(player1.name, DBParams.OTHERS_TABLE, 0);
+                DBParams.updateScore(player2.name, DBParams.OTHERS_TABLE, 0);
+                break;
 			}
         }
         afterPlay();

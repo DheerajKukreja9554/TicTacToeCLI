@@ -4,6 +4,7 @@ import java.util.Random;
 
 import tictactoecli.board.Board;
 import tictactoecli.board.Player;
+import tictactoecli.params.DBParams;
 import tictactoecli.params.GameParams;
 
 public class VsComputer {
@@ -36,7 +37,8 @@ public class VsComputer {
         }
 
         player = new Player(name, ch);
-
+		DBParams.checkPlayer(player.name, DBParams.COMPUTER_TABLE);
+		
         computer = new Player("Computer", player.symbol == GameParams.O ? GameParams.X : GameParams.O);
 
         System.out.println("\nEnter 1 to play first");
@@ -66,6 +68,7 @@ public class VsComputer {
                     board.print();
                     if (board.isWon(player.symbol)) {
                         System.out.println("Congrats, " + player.name + " you won");
+						DBParams.updateScore(player.name, DBParams.COMPUTER_TABLE, 1);
                         break;
                     }
                 } else {
@@ -74,6 +77,7 @@ public class VsComputer {
                     compTurn(board, computer.symbol, player.symbol);
                     board.print();
                     if (board.isWon(computer.symbol)) {
+						DBParams.updateScore(player.name, DBParams.COMPUTER_TABLE, -1);
                         System.out.println("Well tried, but " + computer.name + " won");
                         break;
                     }
@@ -85,6 +89,7 @@ public class VsComputer {
                     board.print();
                     if (board.isWon(player.symbol)) {
                         System.out.println("Congrats, " + player.name + " you won");
+						DBParams.updateScore(player.name, DBParams.COMPUTER_TABLE, 1);
                         break;
                     }
                 } else {
@@ -94,12 +99,14 @@ public class VsComputer {
                     board.print();
                     if (board.isWon(computer.symbol)) {
                         System.out.println("Well tried, but " + computer.name + " won");
+						DBParams.updateScore(player.name, DBParams.COMPUTER_TABLE, -1);
                         break;
                     }
                 }
             }
             if(!(board.couldWin(player.symbol)&&board.couldWin(computer.symbol))){
                 System.out.println("You Played well\nGame ends in a Draw");
+				DBParams.updateScore(player.name, DBParams.COMPUTER_TABLE, 0);
 				break;
             }
         }
