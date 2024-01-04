@@ -21,7 +21,7 @@ public class Board {
     }
     
 	public void print() {
-        System.out.println();
+        System.out.println("Board state");
         for (char[] cs : board) {
             for (char c : cs) {
                 System.out.print(c+"\t");
